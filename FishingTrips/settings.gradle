@@ -1,0 +1,3 @@
+rootProject.name = 'FishingTrips'
+
+includeFlat 'JPAFishing'
