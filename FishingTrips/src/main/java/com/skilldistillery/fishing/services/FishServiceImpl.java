@@ -1,6 +1,7 @@
 package com.skilldistillery.fishing.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,8 +22,12 @@ public class FishServiceImpl implements FishService {
 
 	@Override
 	public Fish getFish(int fishId) {
-		// TODO Auto-generated method stub
-		return null;
+		Fish fish = null;
+		Optional<Fish> optFish = fishRepo.findById(fishId);
+		if (optFish.isPresent()) {
+			fish = optFish.get();
+		}
+		return fish;
 	}
 
 	@Override

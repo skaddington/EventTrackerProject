@@ -2,7 +2,6 @@ package com.skilldistillery.fishing.entities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -14,10 +13,10 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class FishTest {
+class CatchLogTest {
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private Fish fish;
+	private CatchLog log;
 	
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -32,30 +31,44 @@ class FishTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		fish = em.find(Fish.class, 1);
+		log = em.find(CatchLog.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		fish = null;
+		log = null;
 	}
 
 	@Test
-	void test_Fish_basic_mappings() {
-		assertNotNull(fish);
-		assertEquals("Greenback Cutthroat Trout", fish.getCommonName());
-	}
-
-	@Test
-	void test_Fish_BodyOfWater_ManytoMany_mapping() {
-		assertNotNull(fish);
-		assertTrue(fish.getWaters().size() > 0);
+	void test_CatchLog_basic_mappings() {
+		assertNotNull(log);
+		assertEquals(2021, log.getDate().getYear());
+		assertEquals(2.1, log.getWeight());
 	}
 	
 	@Test
-	void test_Fish_CatchLog_OnetoMany_mapping() {
-		assertNotNull(fish);
-		assertTrue(fish.getLogs().size() > 0);
+	void test_CatchLog_BodyOfWater_ManytoOne_mapping() {
+		assertNotNull(log);
+		assertEquals("Lake Estes", log.getWater().getName());
 	}
+	
+	@Test
+	void test_CatchLog_Fish_ManytoOne_mapping() {
+		assertNotNull(log);
+		assertEquals("Rainbow Trout", log.getFish().getCommonName());
+	}
+	
+	@Test
+	void test_CatchLog_TimeOfDay_ManytoOne_mapping() {
+		assertNotNull(log);
+		assertEquals("Morning", log.getTime().getTimeframe());
+	}
+	
+	@Test
+	void test_CatchLog_User_ManytoOne_mapping() {
+		assertNotNull(log);
+		assertEquals("Bugs", log.getUser().getFirstName());
+	}
+
 }

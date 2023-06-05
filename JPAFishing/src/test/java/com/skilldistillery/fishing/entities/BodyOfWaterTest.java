@@ -14,10 +14,10 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class FishTest {
+class BodyOfWaterTest {
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private Fish fish;
+	private BodyOfWater water;
 	
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -32,30 +32,32 @@ class FishTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		fish = em.find(Fish.class, 1);
+		water = em.find(BodyOfWater.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		fish = null;
+		water = null;
 	}
 
 	@Test
-	void test_Fish_basic_mappings() {
-		assertNotNull(fish);
-		assertEquals("Greenback Cutthroat Trout", fish.getCommonName());
-	}
-
-	@Test
-	void test_Fish_BodyOfWater_ManytoMany_mapping() {
-		assertNotNull(fish);
-		assertTrue(fish.getWaters().size() > 0);
+	void test_BodyOfWater_basic_mappings() {
+		assertNotNull(water);
+		assertEquals("Standley Lake", water.getName());
+		assertEquals(5509, water.getElevationInFt());
 	}
 	
 	@Test
-	void test_Fish_CatchLog_OnetoMany_mapping() {
-		assertNotNull(fish);
-		assertTrue(fish.getLogs().size() > 0);
+	void test_BodyOfWater_Fish_ManytoMany_mapping() {
+		assertNotNull(water);
+		assertTrue(water.getFishies().size() > 0);
 	}
+	
+	@Test
+	void test_BodyOfWater_CatchLog_OnetoMany_mapping() {
+		assertNotNull(water);
+		assertTrue(water.getLogs().size() > 0);
+	}
+
 }

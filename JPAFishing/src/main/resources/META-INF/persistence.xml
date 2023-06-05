@@ -5,7 +5,11 @@
 	<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
     
     <!-- begin entities  -->
+    <class>com.skilldistillery.fishing.entities.BodyOfWater</class>
+    <class>com.skilldistillery.fishing.entities.CatchLog</class>
     <class>com.skilldistillery.fishing.entities.Fish</class>
+    <class>com.skilldistillery.fishing.entities.TimeOfDay</class>
+    <class>com.skilldistillery.fishing.entities.User</class>
     
     <!-- end entities  -->
 
