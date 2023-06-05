@@ -13,9 +13,15 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
+@DynamicInsert
+@DynamicUpdate
 public class User {
 	
 	@Id
@@ -30,7 +36,7 @@ public class User {
 	private String lastName;
 	@Column(name="image_url")
 	private String image;
-	private boolean enabled;
+	private boolean enabled = true;
 	private String role;
 	@Column(name="created_at")
 	@CreationTimestamp
@@ -39,6 +45,7 @@ public class User {
 	@UpdateTimestamp
 	private LocalDateTime lastUpdate;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="user")
 	private List<CatchLog> logs;
 	

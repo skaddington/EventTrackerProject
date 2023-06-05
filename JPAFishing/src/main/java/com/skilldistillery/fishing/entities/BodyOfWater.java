@@ -13,6 +13,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "body_of_water")
 public class BodyOfWater {
@@ -32,9 +34,11 @@ public class BodyOfWater {
 	@Column(name = "website_url")
 	private String website;
 
+	@JsonIgnore
 	@ManyToMany(mappedBy = "waters")
 	private List<Fish> fishies;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="water")
 	private List<CatchLog> logs;
 

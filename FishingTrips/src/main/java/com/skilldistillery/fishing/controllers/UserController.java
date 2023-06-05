@@ -15,69 +15,67 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.skilldistillery.fishing.entities.Fish;
-import com.skilldistillery.fishing.services.FishService;
+import com.skilldistillery.fishing.entities.User;
+import com.skilldistillery.fishing.services.UserService;
 
 @RestController
 @RequestMapping("api")
-public class FishController {
+public class UserController {
 
 	@Autowired
-	private FishService fishServ;
+	private UserService userServ;
 
-	@GetMapping("fish")
-	public List<Fish> listAllFish() {
-		return fishServ.listAllFish();
+	@GetMapping("users")
+	public List<User> listAllUsers() {
+		return userServ.getAllUsers();
 	}
 
-	@GetMapping("fish/{fishId}")
-	public Fish findFishById(HttpServletResponse res, @PathVariable int fishId) {
-		Fish fish = fishServ.getFish(fishId);
-		if (fish == null) {
+	@GetMapping("users/{userId}")
+	public User findUserById(HttpServletResponse res, @PathVariable int userId) {
+		User user = userServ.getUser(userId);
+		if (user == null) {
 			res.setStatus(404);
 		}
-		return fish;
+		return user;
 	}
 
-	@PostMapping("fish")
-	public Fish createFish(HttpServletResponse res, HttpServletRequest req, @RequestBody Fish newFish) {
+	@PostMapping("users")
+	public User createUser(HttpServletResponse res, HttpServletRequest req, @RequestBody User newUser) {
 		try {
-			newFish = fishServ.create(newFish);
+			newUser = userServ.create(newUser);
 			res.setStatus(201);
 			StringBuffer url = req.getRequestURL();
-			url.append("/").append(newFish.getId());
+			url.append("/").append(newUser.getId());
 			res.setHeader("Location", url.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 			res.setStatus(400);
-			newFish = null;
+			newUser = null;
 		}
-
-		return newFish;
+		return newUser;
 	}
-	
-	@PutMapping("fish/{fishId}")
-	public Fish updateFish(HttpServletResponse res, @PathVariable int fishId, @RequestBody Fish fish) {
+
+	@PutMapping("users/{userId}")
+	public User updateUser(HttpServletResponse res, @PathVariable int userId, @RequestBody User user) {
 		try {
-			fish = fishServ.update(fishId, fish);
-			if (fish == null) {
+			user = userServ.update(userId, user);
+			if (user == null) {
 				res.setStatus(404);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			res.setStatus(400);
-			fish = null;
+			user = null;
 		}
-		return fish;
+		return user;
 	}
-	
-	@DeleteMapping("fish/{fishId}")
-	public void deleteFish(HttpServletResponse res, @PathVariable int fishId) {
-		if (fishServ.delete(fishId)) {
+
+	@DeleteMapping("users/{userId}")
+	public void deleteUser(HttpServletResponse res, @PathVariable int userId) {
+		if (userServ.delete(userId)) {
 			res.setStatus(204);
 		} else {
 			res.setStatus(404);
 		}
 	}
-
 }

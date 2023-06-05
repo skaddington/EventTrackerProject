@@ -32,20 +32,27 @@ public class FishServiceImpl implements FishService {
 
 	@Override
 	public Fish create(Fish newFish) {
-		// TODO Auto-generated method stub
-		return null;
+		return fishRepo.saveAndFlush(newFish);
 	}
 
 	@Override
 	public Fish update(int fishId, Fish fish) {
-		// TODO Auto-generated method stub
+		Fish existingFish = getFish(fishId);
+		if ( existingFish != null) {
+			//TODO
+			return fishRepo.saveAndFlush(existingFish);
+		}
 		return null;
 	}
 
 	@Override
 	public boolean delete(int fishId) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean deleted = false;
+		if (fishRepo.existsById(fishId)) {
+			fishRepo.deleteById(fishId);
+			deleted = true;
+		}
+		return deleted;
 	}
 
 }

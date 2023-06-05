@@ -14,6 +14,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Fish {
 	@Id
@@ -29,12 +31,14 @@ public class Fish {
 	@Column(name="website_url")
 	private String website;
 	
+	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name="available_fish",
 			joinColumns=@JoinColumn(name="fish_id"),
 			inverseJoinColumns=@JoinColumn(name="body_of_water_id")	)
 	private List<BodyOfWater> waters;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="fish")
 	private List<CatchLog> logs;
 	
