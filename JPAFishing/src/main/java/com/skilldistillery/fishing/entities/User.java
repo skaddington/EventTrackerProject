@@ -45,9 +45,9 @@ public class User {
 	@UpdateTimestamp
 	private LocalDateTime lastUpdate;
 	
-	@JsonIgnore
-	@OneToMany(mappedBy="user")
-	private List<CatchLog> logs;
+//	@JsonIgnore
+//	@OneToMany(mappedBy="user")
+//	private List<CatchLog> logs;
 	
 	public User() {
 	}
@@ -132,31 +132,31 @@ public class User {
 		this.lastUpdate = lastUpdate;
 	}
 
-	public List<CatchLog> getLogs() {
-		return logs;
-	}
-
-	public void setLogs(List<CatchLog> logs) {
-		this.logs = logs;
-	}
-	
-	public void addLog(CatchLog log) {
-		if (logs == null) logs = new ArrayList<>();
-		if (!logs.contains(log)) {
-			logs.add(log);
-			if (log.getUser() != null) {
-				log.getUser().removeLog(log);
-			}
-			log.setUser(this);
-		}
-	}
-	
-	public void removeLog(CatchLog log) {
-		if (logs != null && logs.contains(log)) {
-			logs.remove(log);
-			log.setUser(null);
-		}
-	}
+//	public List<CatchLog> getLogs() {
+//		return logs;
+//	}
+//
+//	public void setLogs(List<CatchLog> logs) {
+//		this.logs = logs;
+//	}
+//	
+//	public void addLog(CatchLog log) {
+//		if (logs == null) logs = new ArrayList<>();
+//		if (!logs.contains(log)) {
+//			logs.add(log);
+//			if (log.getUser() != null) {
+//				log.getUser().removeLog(log);
+//			}
+//			log.setUser(this);
+//		}
+//	}
+//	
+//	public void removeLog(CatchLog log) {
+//		if (logs != null && logs.contains(log)) {
+//			logs.remove(log);
+//			log.setUser(null);
+//		}
+//	}
 
 	@Override
 	public String toString() {

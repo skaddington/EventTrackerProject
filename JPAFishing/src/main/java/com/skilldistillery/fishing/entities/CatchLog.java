@@ -14,9 +14,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
+@DynamicInsert
+@DynamicUpdate
 @Table(name="catch_log")
 public class CatchLog {
 	
@@ -29,7 +33,7 @@ public class CatchLog {
 	private double weight;
 	@Column(name="length_inch")
 	private double length;
-	private boolean enabled;
+	private boolean enabled = true;
 	@Column(name="created_at")
 	@CreationTimestamp
 	private LocalDateTime createdAt;
@@ -49,9 +53,9 @@ public class CatchLog {
 	@JoinColumn(name="time_of_day_id")
 	private TimeOfDay time;
 	
-	@ManyToOne
-	@JoinColumn(name="user_id")
-	private User user;
+//	@ManyToOne
+//	@JoinColumn(name="user_id")
+//	private User user;
 	
 	public CatchLog() {
 	}
@@ -136,13 +140,13 @@ public class CatchLog {
 		this.time = time;
 	}
 
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
+//	public User getUser() {
+//		return user;
+//	}
+//
+//	public void setUser(User user) {
+//		this.user = user;
+//	}
 
 	@Override
 	public String toString() {
@@ -167,8 +171,8 @@ public class CatchLog {
 		builder.append(fish);
 		builder.append(", time=");
 		builder.append(time);
-		builder.append(", user=");
-		builder.append(user);
+//		builder.append(", user=");
+//		builder.append(user);
 		builder.append("]");
 		return builder.toString();
 	}

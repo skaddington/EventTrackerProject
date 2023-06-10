@@ -39,12 +39,21 @@ public class UserServiceImpl implements UserService {
 	public User update(int userId, User user) {
 		User existingUser = getUser(userId);
 		if (existingUser != null) {
-			existingUser.setUsername(user.getUsername());
-			existingUser.setPassword(user.getPassword());
-			existingUser.setFirstName(user.getFirstName());
-			existingUser.setLastName(user.getLastName());
-			existingUser.setImage(user.getImage());
-			existingUser.setRole(user.getRole());
+			if (user.getUsername() != existingUser.getUsername()) {
+				existingUser.setUsername(user.getUsername());
+			}
+			if (user.getPassword() != null) {
+				existingUser.setPassword(user.getPassword());
+			}
+			if (user.getFirstName() != null) {
+				existingUser.setFirstName(user.getFirstName());
+			}
+			if (user.getLastName() != null) {
+				existingUser.setLastName(user.getLastName());
+			}
+			if (user.getImage() != null) {
+				existingUser.setImage(user.getImage());
+			}
 			return userRepo.saveAndFlush(existingUser);
 		}
 		return null;

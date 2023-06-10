@@ -65,10 +65,10 @@ class CatchLogTest {
 		assertEquals("Morning", log.getTime().getTimeframe());
 	}
 	
-	@Test
-	void test_CatchLog_User_ManytoOne_mapping() {
-		assertNotNull(log);
-		assertEquals("Bugs", log.getUser().getFirstName());
-	}
+//	@Test
+//	void test_CatchLog_User_ManytoOne_mapping() {
+//		assertNotNull(log);
+//		assertEquals("Bugs", log.getUser().getFirstName());
+//	}
 
 }

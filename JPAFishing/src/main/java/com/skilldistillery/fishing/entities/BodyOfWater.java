@@ -13,9 +13,14 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
+@DynamicInsert
+@DynamicUpdate
 @Table(name = "body_of_water")
 public class BodyOfWater {
 

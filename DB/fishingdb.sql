@@ -64,27 +64,6 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `user`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `user` ;
-
-CREATE TABLE IF NOT EXISTS `user` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `username` VARCHAR(45) NOT NULL,
-  `password` VARCHAR(45) NOT NULL,
-  `first_name` VARCHAR(45) NULL,
-  `last_name` VARCHAR(45) NULL,
-  `image_url` VARCHAR(2000) NULL DEFAULT 'https://rlv.zcache.com/pussyfoot_fishbowl_fun_poster-r8aa9bad5e4fd4f9e8f2b55ab8cadbb47_jbqw_8byvr_736.webp',
-  `enabled` TINYINT NULL DEFAULT 1,
-  `role` VARCHAR(45) NULL DEFAULT 'USER',
-  `created_at` DATETIME NULL,
-  `last_update` DATETIME NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `username_UNIQUE` (`username` ASC))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `catch_log`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `catch_log` ;
@@ -100,12 +79,10 @@ CREATE TABLE IF NOT EXISTS `catch_log` (
   `fish_id` INT NOT NULL,
   `body_of_water_id` INT NOT NULL,
   `time_of_day_id` INT NOT NULL,
-  `user_id` INT NOT NULL,
-  PRIMARY KEY (`id`, `fish_id`, `body_of_water_id`, `time_of_day_id`, `user_id`),
+  PRIMARY KEY (`id`, `fish_id`, `body_of_water_id`, `time_of_day_id`),
   INDEX `fk_catch_log_fish1_idx` (`fish_id` ASC),
   INDEX `fk_catch_log_body_of_water1_idx` (`body_of_water_id` ASC),
   INDEX `fk_catch_log_time_of_day1_idx` (`time_of_day_id` ASC),
-  INDEX `fk_catch_log_user1_idx` (`user_id` ASC),
   CONSTRAINT `fk_catch_log_fish1`
     FOREIGN KEY (`fish_id`)
     REFERENCES `fish` (`id`)
@@ -119,11 +96,6 @@ CREATE TABLE IF NOT EXISTS `catch_log` (
   CONSTRAINT `fk_catch_log_time_of_day1`
     FOREIGN KEY (`time_of_day_id`)
     REFERENCES `time_of_day` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_catch_log_user1`
-    FOREIGN KEY (`user_id`)
-    REFERENCES `user` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -150,6 +122,27 @@ CREATE TABLE IF NOT EXISTS `available_fish` (
     REFERENCES `fish` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `user`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `user` ;
+
+CREATE TABLE IF NOT EXISTS `user` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `username` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(45) NOT NULL,
+  `first_name` VARCHAR(45) NULL,
+  `last_name` VARCHAR(45) NULL,
+  `image_url` VARCHAR(2000) NULL DEFAULT 'https://rlv.zcache.com/pussyfoot_fishbowl_fun_poster-r8aa9bad5e4fd4f9e8f2b55ab8cadbb47_jbqw_8byvr_736.webp',
+  `enabled` TINYINT NULL DEFAULT 1,
+  `role` VARCHAR(45) NULL DEFAULT 'USER',
+  `created_at` DATETIME NULL,
+  `last_update` DATETIME NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `username_UNIQUE` (`username` ASC))
 ENGINE = InnoDB;
 
 SET SQL_MODE = '';
@@ -222,37 +215,24 @@ COMMIT;
 
 
 -- -----------------------------------------------------
--- Data for table `user`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `fishingdb`;
-INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `image_url`, `enabled`, `role`, `created_at`, `last_update`) VALUES (1, 'admin', 'admin', 'Bugs', 'Bunny', 'https://cdn.shopify.com/s/files/1/2960/6098/products/fullsizeoutput_340c_540x.jpg?v=1604728775', 1, 'ADMIN', NULL, NULL);
-INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `image_url`, `enabled`, `role`, `created_at`, `last_update`) VALUES (2, 'angler1', 'angler1', 'Taz', 'Devil', 'https://cdn.shopify.com/s/files/1/2960/6098/products/fullsizeoutput_340f_540x.jpg?v=1604728775', 1, 'USER', NULL, NULL);
-INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `image_url`, `enabled`, `role`, `created_at`, `last_update`) VALUES (3, 'angler2', 'angler2', 'Sylvester', 'Cat', 'https://static.wikia.nocookie.net/looney-tunes-llc/images/f/ff/Fishing.jpg/revision/latest?cb=20210921180217', 1, 'USER', NULL, NULL);
-INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `image_url`, `enabled`, `role`, `created_at`, `last_update`) VALUES (4, 'angler3', 'angler3', 'Elmer', 'Fudd', 'https://i.pinimg.com/236x/54/39/9c/54399c3208e538d9dbf7cff93d58e39b--fishing-sayings-fishing-humor.jpg', 1, 'USER', NULL, NULL);
-
-COMMIT;
-
-
--- -----------------------------------------------------
 -- Data for table `catch_log`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `fishingdb`;
-INSERT INTO `catch_log` (`id`, `date`, `weight_lbs`, `length_inch`, `enabled`, `created_at`, `last_update`, `fish_id`, `body_of_water_id`, `time_of_day_id`, `user_id`) VALUES (1, '2021-06-17', 2.1, 15, 1, NULL, NULL, 3, 2, 2, 1);
-INSERT INTO `catch_log` (`id`, `date`, `weight_lbs`, `length_inch`, `enabled`, `created_at`, `last_update`, `fish_id`, `body_of_water_id`, `time_of_day_id`, `user_id`) VALUES (2, '2021-07-01', 3.4, 16, 1, NULL, NULL, 8, 14, 5, 2);
-INSERT INTO `catch_log` (`id`, `date`, `weight_lbs`, `length_inch`, `enabled`, `created_at`, `last_update`, `fish_id`, `body_of_water_id`, `time_of_day_id`, `user_id`) VALUES (3, '2021-08-11', 1.4, 10, 1, NULL, NULL, 5, 1, 3, 3);
-INSERT INTO `catch_log` (`id`, `date`, `weight_lbs`, `length_inch`, `enabled`, `created_at`, `last_update`, `fish_id`, `body_of_water_id`, `time_of_day_id`, `user_id`) VALUES (4, '2021-09-15', 2.9, 17, 1, NULL, NULL, 4, 3, 4, 4);
-INSERT INTO `catch_log` (`id`, `date`, `weight_lbs`, `length_inch`, `enabled`, `created_at`, `last_update`, `fish_id`, `body_of_water_id`, `time_of_day_id`, `user_id`) VALUES (5, '2022-04-27', 3.2, 15, 1, NULL, NULL, 2, 13, 6, 1);
-INSERT INTO `catch_log` (`id`, `date`, `weight_lbs`, `length_inch`, `enabled`, `created_at`, `last_update`, `fish_id`, `body_of_water_id`, `time_of_day_id`, `user_id`) VALUES (6, '2022-05-21', 1.6, 13, 1, NULL, NULL, 1, 7, 1, 2);
-INSERT INTO `catch_log` (`id`, `date`, `weight_lbs`, `length_inch`, `enabled`, `created_at`, `last_update`, `fish_id`, `body_of_water_id`, `time_of_day_id`, `user_id`) VALUES (7, '2022-06-12', 6.2, 21, 1, NULL, NULL, 6, 6, 7, 3);
-INSERT INTO `catch_log` (`id`, `date`, `weight_lbs`, `length_inch`, `enabled`, `created_at`, `last_update`, `fish_id`, `body_of_water_id`, `time_of_day_id`, `user_id`) VALUES (8, '2022-07-23', 2.3, 14, 1, NULL, NULL, 9, 9, 2, 4);
-INSERT INTO `catch_log` (`id`, `date`, `weight_lbs`, `length_inch`, `enabled`, `created_at`, `last_update`, `fish_id`, `body_of_water_id`, `time_of_day_id`, `user_id`) VALUES (9, '2022-08-02', 2.0, 13, 1, NULL, NULL, 7, 12, 6, 1);
-INSERT INTO `catch_log` (`id`, `date`, `weight_lbs`, `length_inch`, `enabled`, `created_at`, `last_update`, `fish_id`, `body_of_water_id`, `time_of_day_id`, `user_id`) VALUES (10, '2022-09-16', 2.2, 11, 1, NULL, NULL, 10, 10, 3, 2);
-INSERT INTO `catch_log` (`id`, `date`, `weight_lbs`, `length_inch`, `enabled`, `created_at`, `last_update`, `fish_id`, `body_of_water_id`, `time_of_day_id`, `user_id`) VALUES (11, '2023-04-18', 2.5, 13, 1, NULL, NULL, 1, 4, 1, 3);
-INSERT INTO `catch_log` (`id`, `date`, `weight_lbs`, `length_inch`, `enabled`, `created_at`, `last_update`, `fish_id`, `body_of_water_id`, `time_of_day_id`, `user_id`) VALUES (12, '2023-05-04', 2.6, 14, 1, NULL, NULL, 2, 5, 4, 4);
-INSERT INTO `catch_log` (`id`, `date`, `weight_lbs`, `length_inch`, `enabled`, `created_at`, `last_update`, `fish_id`, `body_of_water_id`, `time_of_day_id`, `user_id`) VALUES (13, '2023-05-28', 3.7, 16, 1, NULL, NULL, 9, 8, 7, 1);
-INSERT INTO `catch_log` (`id`, `date`, `weight_lbs`, `length_inch`, `enabled`, `created_at`, `last_update`, `fish_id`, `body_of_water_id`, `time_of_day_id`, `user_id`) VALUES (14, '2023-06-03', 2.4, 11, 1, NULL, NULL, 3, 11, 5, 2);
+INSERT INTO `catch_log` (`id`, `date`, `weight_lbs`, `length_inch`, `enabled`, `created_at`, `last_update`, `fish_id`, `body_of_water_id`, `time_of_day_id`) VALUES (1, '2021-06-17', 2.1, 15, 1, NULL, NULL, 3, 2, 2);
+INSERT INTO `catch_log` (`id`, `date`, `weight_lbs`, `length_inch`, `enabled`, `created_at`, `last_update`, `fish_id`, `body_of_water_id`, `time_of_day_id`) VALUES (2, '2021-07-01', 3.4, 16, 1, NULL, NULL, 8, 14, 5);
+INSERT INTO `catch_log` (`id`, `date`, `weight_lbs`, `length_inch`, `enabled`, `created_at`, `last_update`, `fish_id`, `body_of_water_id`, `time_of_day_id`) VALUES (3, '2021-08-11', 1.4, 10, 1, NULL, NULL, 5, 1, 3);
+INSERT INTO `catch_log` (`id`, `date`, `weight_lbs`, `length_inch`, `enabled`, `created_at`, `last_update`, `fish_id`, `body_of_water_id`, `time_of_day_id`) VALUES (4, '2021-09-15', 2.9, 17, 1, NULL, NULL, 4, 3, 4);
+INSERT INTO `catch_log` (`id`, `date`, `weight_lbs`, `length_inch`, `enabled`, `created_at`, `last_update`, `fish_id`, `body_of_water_id`, `time_of_day_id`) VALUES (5, '2022-04-27', 3.2, 15, 1, NULL, NULL, 2, 13, 6);
+INSERT INTO `catch_log` (`id`, `date`, `weight_lbs`, `length_inch`, `enabled`, `created_at`, `last_update`, `fish_id`, `body_of_water_id`, `time_of_day_id`) VALUES (6, '2022-05-21', 1.6, 13, 1, NULL, NULL, 1, 7, 1);
+INSERT INTO `catch_log` (`id`, `date`, `weight_lbs`, `length_inch`, `enabled`, `created_at`, `last_update`, `fish_id`, `body_of_water_id`, `time_of_day_id`) VALUES (7, '2022-06-12', 6.2, 21, 1, NULL, NULL, 6, 6, 7);
+INSERT INTO `catch_log` (`id`, `date`, `weight_lbs`, `length_inch`, `enabled`, `created_at`, `last_update`, `fish_id`, `body_of_water_id`, `time_of_day_id`) VALUES (8, '2022-07-23', 2.3, 14, 1, NULL, NULL, 9, 9, 2);
+INSERT INTO `catch_log` (`id`, `date`, `weight_lbs`, `length_inch`, `enabled`, `created_at`, `last_update`, `fish_id`, `body_of_water_id`, `time_of_day_id`) VALUES (9, '2022-08-02', 2.0, 13, 1, NULL, NULL, 7, 12, 6);
+INSERT INTO `catch_log` (`id`, `date`, `weight_lbs`, `length_inch`, `enabled`, `created_at`, `last_update`, `fish_id`, `body_of_water_id`, `time_of_day_id`) VALUES (10, '2022-09-16', 2.2, 11, 1, NULL, NULL, 10, 10, 3);
+INSERT INTO `catch_log` (`id`, `date`, `weight_lbs`, `length_inch`, `enabled`, `created_at`, `last_update`, `fish_id`, `body_of_water_id`, `time_of_day_id`) VALUES (11, '2023-04-18', 2.5, 13, 1, NULL, NULL, 1, 4, 1);
+INSERT INTO `catch_log` (`id`, `date`, `weight_lbs`, `length_inch`, `enabled`, `created_at`, `last_update`, `fish_id`, `body_of_water_id`, `time_of_day_id`) VALUES (12, '2023-05-04', 2.6, 14, 1, NULL, NULL, 2, 5, 4);
+INSERT INTO `catch_log` (`id`, `date`, `weight_lbs`, `length_inch`, `enabled`, `created_at`, `last_update`, `fish_id`, `body_of_water_id`, `time_of_day_id`) VALUES (13, '2023-05-28', 3.7, 16, 1, NULL, NULL, 9, 8, 7);
+INSERT INTO `catch_log` (`id`, `date`, `weight_lbs`, `length_inch`, `enabled`, `created_at`, `last_update`, `fish_id`, `body_of_water_id`, `time_of_day_id`) VALUES (14, '2023-06-03', 2.4, 11, 1, NULL, NULL, 3, 11, 5);
 
 COMMIT;
 
@@ -308,6 +288,19 @@ INSERT INTO `available_fish` (`body_of_water_id`, `fish_id`) VALUES (14, 6);
 INSERT INTO `available_fish` (`body_of_water_id`, `fish_id`) VALUES (14, 7);
 INSERT INTO `available_fish` (`body_of_water_id`, `fish_id`) VALUES (14, 8);
 INSERT INTO `available_fish` (`body_of_water_id`, `fish_id`) VALUES (1, 5);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `user`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `fishingdb`;
+INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `image_url`, `enabled`, `role`, `created_at`, `last_update`) VALUES (1, 'admin', 'admin', 'Bugs', 'Bunny', 'https://cdn.shopify.com/s/files/1/2960/6098/products/fullsizeoutput_340c_540x.jpg?v=1604728775', 1, 'ADMIN', NULL, NULL);
+INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `image_url`, `enabled`, `role`, `created_at`, `last_update`) VALUES (2, 'angler1', 'angler1', 'Taz', 'Devil', 'https://cdn.shopify.com/s/files/1/2960/6098/products/fullsizeoutput_340f_540x.jpg?v=1604728775', 1, 'USER', NULL, NULL);
+INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `image_url`, `enabled`, `role`, `created_at`, `last_update`) VALUES (3, 'angler2', 'angler2', 'Sylvester', 'Cat', 'https://static.wikia.nocookie.net/looney-tunes-llc/images/f/ff/Fishing.jpg/revision/latest?cb=20210921180217', 1, 'USER', NULL, NULL);
+INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `image_url`, `enabled`, `role`, `created_at`, `last_update`) VALUES (4, 'angler3', 'angler3', 'Elmer', 'Fudd', 'https://i.pinimg.com/236x/54/39/9c/54399c3208e538d9dbf7cff93d58e39b--fishing-sayings-fishing-humor.jpg', 1, 'USER', NULL, NULL);
 
 COMMIT;
 

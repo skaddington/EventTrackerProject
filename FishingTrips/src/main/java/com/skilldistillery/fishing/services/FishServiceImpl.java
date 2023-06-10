@@ -39,7 +39,18 @@ public class FishServiceImpl implements FishService {
 	public Fish update(int fishId, Fish fish) {
 		Fish existingFish = getFish(fishId);
 		if ( existingFish != null) {
-			//TODO
+			if ( fish.getCommonName() != null) {
+				existingFish.setCommonName(fish.getCommonName());
+			}
+			if ( fish.getScientificName() != null) {
+				existingFish.setScientificName(fish.getScientificName());
+			}
+			if ( fish.getImage() != null) {
+				existingFish.setImage(fish.getImage());
+			}
+			if ( fish.getWebsite() != null) {
+				existingFish.setWebsite(fish.getWebsite());
+			}
 			return fishRepo.saveAndFlush(existingFish);
 		}
 		return null;
@@ -54,5 +65,4 @@ public class FishServiceImpl implements FishService {
 		}
 		return deleted;
 	}
-
 }

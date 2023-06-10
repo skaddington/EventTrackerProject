@@ -31,3 +31,19 @@ Screenshot of ER Diagram, desc of entities
 ### Lessons Learned
 - todo
 - todo
+
+## JavaScript/AJAX Front End
+
+### Tech
+- blah
+
+### Lessons Learned
+- todo
+
+## Angular
+
+### Tech
+- blah
+
+### Lessons Learned
+- todo
