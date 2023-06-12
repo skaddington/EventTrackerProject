@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Fishing Trips</title>
+	<script type="text/javascript" src="js/logFunctions.js"></script>
+	<link
+		href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+		rel="stylesheet"
+		integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
+		crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+</head>
+<body>
+<div class='container'>
+	<h1>Welcome to Fishing Trips</h1>
+	
+	<!-- <form name="searchLogForm">
+		<input type="number" name="logId">
+		<button class='btn btn-primary' name="lookup">Get Catch Log by Id</button>
+	</form> -->
+	<hr>
+	<div id="output">
+		<div id="logData"></div>
+		<div id="fishData"></div>
+		<div id="lakeData"></div>
+	</div>
+	<hr>
+	<div id="newLogFormDiv">
+		<h2>Submit a New Catch</h2>
+		<form name="newLogForm">
+			<label for="fish">Fish Species : </label>
+				<select name="fish" id="fish-select" required>
+					<option value="">*-Please choose an option-*</option>
+					<option value="1">Greenback Cutthroat Trout</option>
+					<option value="2">Kokanee Salmon</option>
+					<option value="3">Rainbow Trout</option>
+					<option value="4">Tiger Muskie</option>
+					<option value="5">Bluegill</option>
+					<option value="6">Northern Pike</option>
+					<option value="7">Mountain Whitefish</option>
+					<option value="8">Common Carp</option>
+					<option value="9">Lake Trout</option>
+					<option value="10">Tiger Trout</option>
+				</select><br>
+			<label for="water">Lake/Reservoir/River/Stream : </label>	
+				<select name="water" id="water-select" required>
+					<option value="">*-Please choose an option-*</option>
+					<option value="1">Standley Lake</option>
+					<option value="2">Lake Estes</option>
+					<option value="3">Gross Reservoir</option>
+					<option value="4">Elevenmile Reservoir</option>
+					<option value="5">Lake Isabel</option>
+					<option value="6">Taylor Reservoir</option>
+					<option value="7">Lake Granby</option>
+					<option value="8">Grand Lake</option>
+					<option value="9">Blue Mesa Reservoir</option>
+					<option value="10">Arkansas River</option>
+					<option value="11">South Platte River</option>
+					<option value="12">Colorado River</option>
+					<option value="13">Gunnison River</option>
+					<option value="14">Yampa River</option>
+				</select><br>
+			<label for="weight">Weight in Pounds : </label>	
+				<input type="number" name="weight" required><br>
+			<label for="length">Length in Inches : </label>	
+				<input type="number" name="length" required><br>
+			<label for="time">Time of Day : </label>	
+				<input type="radio" id="dawn" value ="1" name="time" required>
+					<label for="dawn">Dawn</label>
+				<input type="radio" id="morning" value ="2" name="time">
+					<label for="morning">Morning</label>
+				<input type="radio" id="noon" value ="3" name="time">
+					<label for="noon">Noon</label>
+				<input type="radio" id="afternoon" value ="4" name="time">
+					<label for="afternoon">Afternoon</label>
+				<input type="radio" id="evening" value ="5" name="time">
+					<label for="evening">Evening</label>
+				<input type="radio" id="dusk" value ="6" name="time">
+					<label for="dusk">Dusk</label>
+				<input type="radio" id="night" value ="7" name="time">
+					<label for="night">Night</label><br>
+			<label for="date">Date : </label>	
+				<input type="date" name="date" required><br>
+			<button class='btn btn-success' name="createLogButton">Submit Catch</button>
+		</form>
+	</div>
+</div>
+
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+	crossorigin="anonymous"></script>
+</body>
+</html>
