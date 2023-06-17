@@ -1,0 +1,39 @@
+<h1>Bodies of Water</h1>
+
+<div class="container" id="waterTableDiv" *ngIf="!selectedWater">
+  <table>
+    <thead>
+      <tr>
+        <th>Location ID</th>
+        <th>Name</th>
+        <th>Image</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let water of waters" (click)="showWater(water.id);">
+        <td>{{ water.id }}</td>
+        <td>{{ water.name }}</td>
+        <td>
+          <img src="{{ water.image }}" height="150px" alt="Picture of {{ water.name }}" />
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="container" id="waterDetailDiv" *ngIf="selectedWater && !editWater">
+<ul>
+<li>{{ selectedWater.id }}</li>
+        <li>{{ selectedWater.name }}</li>
+        <li>{{ selectedWater.county }}</li>
+        <li>{{waterType}}</li>
+        <li>{{ selectedWater.elevationInFt }}</li>
+        <li>{{ selectedWater.description }}</li>
+<li *ngFor="let fish of selectedWater.fishies">Available Fish at this location: {{fish.commonName}}</li>
+        <li>
+          <img src="{{ selectedWater.image }}" alt="Picture of {{ selectedWater.name }}" />
+        </li>
+        <li><a href="{{ selectedWater.website }}">More Information about {{selectedWater.name}}</a></li>
+</ul>
+<button class="btn btn-lg btn-outline-secondary" (click)="displayWaterTable();">All Locations</button>
+</div>

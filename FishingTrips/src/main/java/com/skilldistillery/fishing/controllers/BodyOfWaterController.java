@@ -22,7 +22,7 @@ import com.skilldistillery.fishing.services.BodyOfWaterService;
 
 @RestController
 @RequestMapping("api")
-@CrossOrigin({"8086", "http://localhost/"})
+@CrossOrigin({"*", "http://localhost/"})
 public class BodyOfWaterController {
 
 	@Autowired

@@ -1,0 +1,107 @@
+<h1>Catch Logs</h1>
+
+<div class="container" id="logTableDiv" *ngIf="!selectedLog">
+  <table>
+    <thead>
+      <tr>
+        <th>Log ID</th>
+        <th>Fish Species</th>
+        <th>Location</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let log of catchlogs" (click)="showLog(log.id)">
+        <td>{{ log.id }}</td>
+        <td>{{ log.fish.commonName }}</td>
+        <td>{{ log.water.name }}</td>
+        <td>{{ log.date }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="container" id="logDetailDiv" *ngIf="selectedLog && !editLog">
+  <ul>
+    <li>{{ selectedLog.id }}</li>
+    <li>{{ selectedLog.date }}</li>
+    <li>{{ selectedLog.time.timeframe }}</li>
+    <li>{{ selectedLog.water.name }}</li>
+    <li>{{ selectedLog.fish.commonName }}</li>
+    <li>{{ selectedLog.weight }}</li>
+    <li>{{ selectedLog.length }}</li>
+    <li>{{ selectedLog.createdAt }}</li>
+    <li>{{ selectedLog.lastUpdate }}</li>
+  </ul>
+  <button class="btn btn-lg btn-outline-secondary" (click)="displayLogTable()">
+    All Catch Logs
+  </button>
+</div>
+
+<hr>
+
+<div class="container" id="addLogFormDiv">
+  <form>
+    <label for="date">Date: </label>
+    <input type="date" name="date" [(ngModel)]="newLog.date" required/><br />
+
+    <label for="time">Time of Day : </label>
+    <input type="radio" id="dawn" value="1" name="time" [(ngModel)]="newLog.time.id" required />
+    <label for="dawn">Dawn</label>
+    <input type="radio" id="morning" value="2" name="time" [(ngModel)]="newLog.time.id" />
+    <label for="morning">Morning</label>
+    <input type="radio" id="noon" value="3" name="time" [(ngModel)]="newLog.time.id" />
+    <label for="noon">Noon</label>
+    <input type="radio" id="afternoon" value="4" name="time" [(ngModel)]="newLog.time.id" />
+    <label for="afternoon">Afternoon</label>
+    <input type="radio" id="evening" value="5" name="time" [(ngModel)]="newLog.time.id" />
+    <label for="evening">Evening</label>
+    <input type="radio" id="dusk" value="6" name="time" [(ngModel)]="newLog.time.id" />
+    <label for="dusk">Dusk</label>
+    <input type="radio" id="night" value="7" name="time" [(ngModel)]="newLog.time.id" />
+    <label for="night">Night</label><br />
+
+    <label for="water">Location: </label>
+    <select name="water" id="water-select" [(ngModel)]="newLog.water.id" required>
+      <option value="">--- Please select a Location ---</option>
+      <option value="1">Standley Lake</option>
+      <option value="2">Lake Estes</option>
+      <option value="3">Gross Reservoir</option>
+      <option value="4">Elevenmile Reservoir</option>
+      <option value="5">Lake Isabel</option>
+      <option value="6">Taylor Reservoir</option>
+      <option value="7">Lake Granby</option>
+      <option value="8">Grand Lake</option>
+      <option value="9">Blue Mesa Reservoir</option>
+      <option value="10">Arkansas River</option>
+      <option value="11">South Platte River</option>
+      <option value="12">Colorado River</option>
+      <option value="13">Gunnison River</option>
+      <option value="14">Yampa River</option>
+    </select><br />
+
+    <label for="fish">Fish Species : </label>
+    <select name="fish" id="fish-select" [(ngModel)]="newLog.fish.id" required>
+      <option value="">*-Please choose an option-*</option>
+      <option value="1">Greenback Cutthroat Trout</option>
+      <option value="2">Kokanee Salmon</option>
+      <option value="3">Rainbow Trout</option>
+      <option value="4">Tiger Muskie</option>
+      <option value="5">Bluegill</option>
+      <option value="6">Northern Pike</option>
+      <option value="7">Mountain Whitefish</option>
+      <option value="8">Common Carp</option>
+      <option value="9">Lake Trout</option>
+      <option value="10">Tiger Trout</option></select><br />
+
+    <label for="weight">Fish Weight (in pounds): </label>
+    <input type="number" name="weight" [(ngModel)]="newLog.weight" required/><br />
+
+    <label for="length">Fish Length (in inches): </label>
+    <input type="number" name="length" [(ngModel)]="newLog.length" required/><br />
+
+    <button class="btn btn-dark btn-outline-success" (click)="addLog(newLog)">
+      Add Catch Log
+    </button>
+  </form>
+</div>

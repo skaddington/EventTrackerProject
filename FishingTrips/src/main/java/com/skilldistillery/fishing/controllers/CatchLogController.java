@@ -22,7 +22,7 @@ import com.skilldistillery.fishing.services.CatchLogService;
 
 @RestController
 @RequestMapping("api")
-@CrossOrigin({"8086", "http://localhost/"})
+@CrossOrigin({"*", "http://localhost/"})
 public class CatchLogController {
 
 	@Autowired

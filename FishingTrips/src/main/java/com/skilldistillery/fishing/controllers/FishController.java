@@ -21,7 +21,7 @@ import com.skilldistillery.fishing.services.FishService;
 
 @RestController
 @RequestMapping("api")
-@CrossOrigin({"8086", "http://localhost/"})
+@CrossOrigin({"*", "http://localhost/"})
 public class FishController {
 
 	@Autowired
