@@ -1,12 +1,1 @@
-{
-	"prettier.tabWidth": 3,
-	"editor.defaultFormatter": "esbenp.prettier-vscode",
-  "workbench.colorTheme": "Quiet Light",
-  "editor.language.brackets": [],
-  "window.autoDetectColorScheme": true,
-  "workbench.preferredLightColorTheme": "Quiet Light",
-  "workbench.preferredDarkColorTheme": "Quiet Dark",
-  "workbench.preferredHighContrastColorTheme": "Quiet Dark",
-  "workbench.preferredHighContrastLightColorTheme": "Quiet Light",
-  "workbench.tree.indent": 4
-}
+{}

@@ -11,6 +11,7 @@ import { FishComponent } from './components/fish/fish.component';
 import { BodyOfWaterComponent } from './components/body-of-water/body-of-water.component';
 import { CatchLogComponent } from './components/catch-log/catch-log.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
