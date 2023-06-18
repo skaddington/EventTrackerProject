@@ -47,4 +47,16 @@ console.log(newLog);
     );
   }
 
+  destroy(logId: number): Observable<void> {
+    return this.http.delete<void>(this.url + "/" + logId).pipe(
+      catchError((err:any) => {
+        console.error(err);
+        return throwError(
+          () => new Error('CatchLogService.destroy(): error deleting log: ' + err)
+        );
+      })
+    );
+  }
+
+
 }

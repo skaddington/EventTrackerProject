@@ -64,7 +64,6 @@ export class CatchLogComponent implements OnInit {
   }
 
   addLog(newLog: CatchLog): void {
-console.log(newLog);
     this.logService.create(newLog).subscribe({
       next: (createdLog) => {
         // this.selectedLog = createdLog;
@@ -77,4 +76,20 @@ console.log(newLog);
       },
     });
   }
+
+  deleteLog(logId: number): void {
+    this.logService.destroy(logId).subscribe({
+      next: () =>{
+        this.loadCatchLogs();
+        this.selectedLog = null;
+      },
+      error: (problem) => {
+        console.error('CatchLogComponent.deleteLog(): error deleting log:');
+        console.log(problem);
+      }
+    });
+    this.loadCatchLogs();
+  }
+
+
 }
