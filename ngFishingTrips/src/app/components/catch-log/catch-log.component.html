@@ -1,8 +1,8 @@
 <h1>Catch Logs</h1>
 
 <div class="container" id="logTableDiv" *ngIf="!selectedLog">
-   <table>
-      <thead>
+   <table class="table table-striped table-hover">
+      <thead class="table-dark">
          <tr>
             <th>Log ID</th>
             <th>Fish Species</th>
@@ -22,31 +22,40 @@
 </div>
 
 <div class="container" id="logDetailDiv" *ngIf="selectedLog && !editLog">
-   <ul>
-      <li>{{ selectedLog.id }}</li>
-      <li>{{ selectedLog.date }}</li>
-      <li>{{ selectedLog.time.timeframe }}</li>
-      <li>{{ selectedLog.water.name }}</li>
-      <li>{{ selectedLog.fish.commonName }}</li>
-      <li>{{ selectedLog.weight }}</li>
-      <li>{{ selectedLog.length }}</li>
-      <li>{{ selectedLog.createdAt }}</li>
-      <li>{{ selectedLog.lastUpdate }}</li>
-   </ul>
-   <button class="btn btn-lg btn-outline-info" (click)="setEditLog()">
+   <div class="row">
+      <div class="col-6">
+         <h2>Log No. {{ selectedLog.id }}</h2>
+         <h3>{{ selectedLog.time.timeframe }} of {{ selectedLog.date }}</h3>
+         <h3>Location: {{ selectedLog.water.name }}</h3>
+         <h3>Fish Species: {{ selectedLog.fish.commonName }}</h3>
+         <h4>{{ selectedLog.weight }} pounds | {{ selectedLog.length }} inches</h4>
+         <h6>{{ selectedLog.createdAt }}</h6>
+         <h6>{{ selectedLog.lastUpdate }}</h6>
+      </div>
+
+      <div class="col-6">
+         <img id="logImage" src="{{selectedLog.water.image}}" alt="Picture of {{selectedLog.water.name}}">
+         <br>
+         <img id="logImage" src="{{selectedLog.fish.image}}" alt="Picture of {{selectedLog.fish.commonName}}">
+      </div>
+   </div>
+   <div class="row">
+   <button class="btn btn-outline-info" (click)="setEditLog()">
       Edit This Log
    </button>
-   <button class="btn btn-lg btn-outline-danger" (click)="deleteLog(selectedLog.id)">
+   <button class="btn btn-outline-danger" (click)="deleteLog(selectedLog.id)">
       Delete This Log
    </button>
-   <button class="btn btn-lg btn-outline-secondary" (click)="displayLogTable()">
+   <button class="btn btn-outline-secondary" (click)="displayLogTable()">
       All Catch Logs
    </button>
+</div>
 </div>
 
 <hr />
 
 <div class="container" id="addLogDiv" *ngIf="newLog && !editLog && !selectedLog">
+   <h3>Caught a Fish? Add it to the Catch Log!</h3>
    <form>
       <label for="date">Date: </label>
       <input type="date" name="date" [(ngModel)]="newLog.date" required /><br />

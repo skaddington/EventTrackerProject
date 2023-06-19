@@ -1,51 +1,60 @@
 <h1>Fish Species</h1>
 
 <div class="container" id="fishTableDiv" *ngIf="!selectedFish">
-  <table>
-    <thead>
-      <tr>
-        <th>Fish ID</th>
-        <th>Common Name</th>
-        <th>Image</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let fish of fishies" (click)="showFish(fish.id)">
-        <td>{{ fish.id }}</td>
-        <td>{{ fish.commonName }}</td>
-        <td>
-          <img
-            src="{{ fish.image }}"
-            height="150px"
-            alt="Picture of {{ fish.commonName }}"
-          />
-        </td>
-      </tr>
-    </tbody>
-  </table>
+   <table class="table table-striped table-hover">
+      <thead class="table-dark">
+         <tr>
+            <th>Fish ID</th>
+            <th>Common Name</th>
+            <th>Image</th>
+         </tr>
+      </thead>
+      <tbody>
+         <tr *ngFor="let fish of fishies" (click)="showFish(fish.id)">
+            <td>{{ fish.id }}</td>
+            <td>{{ fish.commonName }}</td>
+            <td>
+               <img
+                  src="{{ fish.image }}"
+                  height="125px"
+                  alt="Picture of {{ fish.commonName }}"
+               />
+            </td>
+         </tr>
+      </tbody>
+   </table>
 </div>
 
-<div class="container" id="fishDetailsDiv" *ngIf="selectedFish && !editFish">
-<ul>
-    <li>Fish Id: {{ selectedFish.id }}</li>
-    <li>Common Name: {{ selectedFish.commonName }}</li>
-    <li>Scientific Name: {{ selectedFish.scientificName }}</li>
-    <li *ngFor="let water of selectedFish.waters">
-      Can be caught at :{{ water.name }}
-    </li>
-    <li>
-      <a href="{{ selectedFish.website }}"
-        >More Information about {{ selectedFish.commonName }}</a
-      >
-    </li>
-    <li>
+
+<div class="container row" id="fishDetailsDiv" *ngIf="selectedFish && !editFish">
+
+   <div class="col-7 text-align-center">
+         <h2>{{ selectedFish.commonName }}   |   Id No. {{ selectedFish.id }}</h2>
+         <h3>Scientific Name: </h3>
+         <h3>* {{ selectedFish.scientificName }} *</h3>
+         <h4>
+            <a href="{{ selectedFish.website }}">More Information about {{ selectedFish.commonName }}</a>
+         </h4>
+         <li *ngFor="let water of selectedFish.waters">
+            Can be caught at :{{ water.name }}
+         </li>
+   </div>
+
+   <div class="col-5">
       <img
-        src="{{ selectedFish.image }}"
-        alt="Picture of {{ selectedFish.commonName }}"
+         id="detailsImage"
+         src="{{ selectedFish.image }}"
+         alt="Picture of {{ selectedFish.commonName }}"
       />
-    </li>
-  </ul>
-  <button class="btn btn-lg btn-outline-secondary" (click)="displayFishTable()">
-    All Fish Species
-  </button>
+   </div>
+
+   <div class="row">
+      <button
+         class="btn btn-lg btn-outline-secondary"
+         (click)="displayFishTable()"
+      >
+         All Fish Species
+      </button>
+   </div>
+
 </div>

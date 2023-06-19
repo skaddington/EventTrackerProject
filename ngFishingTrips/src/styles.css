@@ -1,6 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~bootstrap/dist/css/bootstrap.css";
 
-html{
-   background-color: blueviolet;
+html, body, div{
+   background-color: #79cfae
 }
+
+h1 {
+   text-align: center;
+   text-decoration: underline;
+}
+
+#detailsImage, #logImage{
+   padding: 10px;
+   border: gray solid 1px;
+   width: 100%;
+}
+
+th, td{
+   text-align: center;
+}
+
